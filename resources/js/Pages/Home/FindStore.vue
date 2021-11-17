@@ -19,37 +19,46 @@
             initMap() {
                 var mapContainer = document.getElementById('map'),
                 mapOption = {
-                    center: new kakao.maps.LatLng(33.450701, 126.570667),
+                    center: new kakao.maps.LatLng(37.23580406, 126.8738968),
                     level: 3,
                 };
                 
             var map = new kakao.maps.Map(mapContainer, mapOption);
 
+            var markerPosition = new kakao.maps.LatLng(37.23580406, 126.8738968);
+
+            var marker = new kakao.maps.Marker({
+                position : markerPosition
+            });
+
+            marker.setMap(map);
+
             var positions = [
                 {
-                    id: 1,
-                    store: '학생문화관점',
-                    location: '학생문화관 지하1층 로비',
-                    time: '학기 중: 월~금 08:30~19:00 | 토 09:00~14:00',
-                    vacation: '방학 중: 월~금 08:30~18:00 | 토 09:00~14:00',
-                    tel: '02-3277-3707',
-                    latlng: new kakao.maps.LatLng(37.562632898194835, 126.9454282268269)
+                    title: '카카오', 
+                    latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+                },
+                {
+                    title: '생태연못', 
+                    latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+                },
+                {
+                    title: '텃밭', 
+                    latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+                },
+                {
+                    title: '근린공원',
+                    latlng: new kakao.maps.LatLng(33.451393, 126.570738)
                 }
-            ]
+            ];
 
-            var imageSrc = require('@/assets/marker.png'),
-            imageSize = new kakao.maps.Size(24, 35),
-            imageOption = { offset : new kakao.maps.Point(20, 35)};
-
-            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
-            positions.forEach(fucntion(pos) {
+            for(var i = 0; i < positions.length; i++){
                 var marker = new kakao.maps.Marker({
                     map: map,
-                    position: pos.latlng,
-                    image: markerImage,
-                });
-            })
+                    position: positions[i].latlng,
+                    title: positions[i].title,
+                })
+            }
             
             }
         },

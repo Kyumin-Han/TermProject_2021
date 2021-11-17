@@ -20604,9 +20604,67 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/FindStore.vue?vue&type=script&lang=js ***!
   \***************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\resources\\js\\Pages\\Home\\FindStore.vue: Unexpected token, expected \",\" (31:44)\n\n\u001b[0m \u001b[90m 29 |\u001b[39m             \u001b[36mvar\u001b[39m markerImage \u001b[33m=\u001b[39m \u001b[36mnew\u001b[39m kakao\u001b[33m.\u001b[39mmaps\u001b[33m.\u001b[39m\u001b[33mMarkerImage\u001b[39m(imageSrc\u001b[33m,\u001b[39m imageSize\u001b[33m,\u001b[39m imageOption)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 30 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 31 |\u001b[39m             positions\u001b[33m.\u001b[39mforEach(fucntion(pos) {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 32 |\u001b[39m                 \u001b[36mvar\u001b[39m marker \u001b[33m=\u001b[39m \u001b[36mnew\u001b[39m kakao\u001b[33m.\u001b[39mmaps\u001b[33m.\u001b[39m\u001b[33mMarker\u001b[39m({\u001b[0m\n\u001b[0m \u001b[90m 33 |\u001b[39m                     map\u001b[33m:\u001b[39m mpa\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 34 |\u001b[39m                     position\u001b[33m:\u001b[39m pos\u001b[33m.\u001b[39mlatlng\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:541:17)\n    at Parser.raiseWithData (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:534:17)\n    at Parser.raise (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:495:17)\n    at Parser.unexpected (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:3587:16)\n    at Parser.expect (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:3561:28)\n    at Parser.parseCallExpressionArguments (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:11755:14)\n    at Parser.parseCoverCallAndAsyncArrowHead (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:11678:29)\n    at Parser.parseSubscript (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:11608:19)\n    at Parser.parseSubscripts (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:11581:19)\n    at Parser.parseExprSubscripts (C:\\Users\\4rbal\\Desktop\\21-2학기\\termProject\\FeedMyCar\\node_modules\\@babel\\parser\\lib\\index.js:11570:17)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    initMap: function initMap() {
+      var mapContainer = document.getElementById('map'),
+          mapOption = {
+        center: new kakao.maps.LatLng(37.23580406, 126.8738968),
+        level: 3
+      };
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+      var markerPosition = new kakao.maps.LatLng(37.23580406, 126.8738968);
+      var marker = new kakao.maps.Marker({
+        position: markerPosition
+      });
+      marker.setMap(map);
+      var positions = [{
+        title: '카카오',
+        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+      }, {
+        title: '생태연못',
+        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+      }, {
+        title: '텃밭',
+        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+      }, {
+        title: '근린공원',
+        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+      }];
+
+      for (var i = 0; i < positions.length; i++) {
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: positions[i].latlng,
+          title: positions[i].title
+        });
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (window.kakao && window.kakao.maps) {
+      this.initMap();
+    } else {
+      var script = document.createElement('script');
+      script.src = "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=51e5c001758d8de292d6f382daf5f9e7";
+
+      script.onload = function () {
+        return kakao.maps.load(_this.initMap);
+      };
+
+      document.head.appendChild(script);
+    }
+  }
+});
 
 /***/ }),
 
@@ -24344,7 +24402,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<figure class=\"px-10 pt-10\"><div id=\"map\" style=\"width:100%;height:400px;\"></div></figure><div class=\"card-body\"><h2 class=\"card-title\"></h2><p>지도에서 충전소 찾기</p><div class=\"justify-center card-actions\"><button class=\"btn btn-outline btn-accent\">More info</button></div></div>", 2);
 
 var _hoisted_4 = [_hoisted_2];
-function render(_ctx, _cache) {
+function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_4);
 }
 
