@@ -15,6 +15,7 @@
 
 <script>
     export default {
+        props : ['locations'],
         methods: {
             initMap() {
                 var mapContainer = document.getElementById('map'),
@@ -34,23 +35,19 @@
             marker.setMap(map);
 
             var positions = [
-                {
-                    title: '카카오', 
-                    latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-                },
-                {
-                    title: '생태연못', 
-                    latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-                },
-                {
-                    title: '텃밭', 
-                    latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-                },
-                {
-                    title: '근린공원',
-                    latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-                }
+                
             ];
+
+            this.locations.forEach(function(loc) {
+                positions.push({
+                    title: loc.충전소명,
+                    latlng: new kakao.maps.LatLng(loc.위도, loc.경도)
+                })
+            })
+
+            console.log(positions)
+
+    
 
             for(var i = 0; i < positions.length; i++){
                 var marker = new kakao.maps.Marker({

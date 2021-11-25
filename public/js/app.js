@@ -20592,6 +20592,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  props: ['locations'],
   components: {
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     FindStore: _Pages_Home_FindStore_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -20612,6 +20613,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['locations'],
   methods: {
     initMap: function initMap() {
       var mapContainer = document.getElementById('map'),
@@ -20625,19 +20627,14 @@ __webpack_require__.r(__webpack_exports__);
         position: markerPosition
       });
       marker.setMap(map);
-      var positions = [{
-        title: '카카오',
-        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-      }, {
-        title: '생태연못',
-        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-      }, {
-        title: '텃밭',
-        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-      }, {
-        title: '근린공원',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-      }];
+      var positions = [];
+      this.locations.forEach(function (loc) {
+        positions.push({
+          title: loc.충전소명,
+          latlng: new kakao.maps.LatLng(loc.위도, loc.경도)
+        });
+      });
+      console.log(positions);
 
       for (var i = 0; i < positions.length; i++) {
         var marker = new kakao.maps.Marker({
@@ -24372,7 +24369,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_find_store)])])])];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_find_store, {
+        locations: _ctx.locations
+      }, null, 8
+      /* PROPS */
+      , ["locations"])])])])];
     }),
     _: 1
     /* STABLE */
