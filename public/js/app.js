@@ -20626,6 +20626,8 @@ __webpack_require__.r(__webpack_exports__);
       var marker = new kakao.maps.Marker({
         position: markerPosition
       });
+      var zoomControl = new kakao.maps.ZoomControl();
+      map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
       marker.setMap(map);
       var positions = [];
       this.locations.forEach(function (loc) {
@@ -20635,6 +20637,46 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       console.log(positions);
+
+      if (navigator.geolocation) {
+        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var lat = position.coords.latitude,
+              // 위도
+          lon = position.coords.longitude; // 경도
+
+          var locPosition = new kakao.maps.LatLng(lat, lon),
+              // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+          message = '<div style="padding:5px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+          // 마커와 인포윈도우를 표시합니다
+
+          displayMarker(locPosition, message);
+        });
+      } else {
+        // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+            message = 'geolocation을 사용할수 없어요..';
+        displayMarker(locPosition, message);
+      }
+
+      function displayMarker(locPosition, message) {
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: locPosition
+        });
+        var iwContent = message,
+            // 인포윈도우에 표시할 내용
+        iwRemoveable = true; // 인포윈도우를 생성합니다
+
+        var infowindow = new kakao.maps.InfoWindow({
+          content: iwContent,
+          removable: iwRemoveable
+        }); // 인포윈도우를 마커위에 표시합니다 
+
+        infowindow.open(map, marker); // 지도 중심좌표를 접속위치로 변경합니다
+
+        map.setCenter(locPosition);
+      }
 
       for (var i = 0; i < positions.length; i++) {
         var marker = new kakao.maps.Marker({
@@ -24400,7 +24442,7 @@ var _hoisted_1 = {
   "class": "card text-center shadow-2xl"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<figure class=\"px-10 pt-10\"><div id=\"map\" style=\"width:100%;height:400px;\"></div></figure><div class=\"card-body\"><h2 class=\"card-title\"></h2><p>지도에서 충전소 찾기</p><div class=\"justify-center card-actions\"><button class=\"btn btn-outline btn-accent\">More info</button></div></div>", 2);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<figure class=\"px-10 pt-10\"><div id=\"map\" style=\"width:100%;height:400px;\"></div><div class=\"custom_zoomcontrol radius_border\"></div></figure><div class=\"card-body\"><h2 class=\"card-title\"></h2><p>지도에서 충전소 찾기</p><div class=\"justify-center card-actions\"><button class=\"btn btn-outline btn-accent\">More info</button></div></div>", 2);
 
 var _hoisted_4 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
