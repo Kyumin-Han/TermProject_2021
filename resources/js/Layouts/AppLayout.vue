@@ -22,6 +22,14 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     충전소 찾기
                                 </jet-nav-link>
+                                
+                                <jet-nav-link :href="route('mycar')" :active="route().current('mycar')">
+                                    내 차 정보 입력하기
+                                </jet-nav-link>
+
+                                <jet-nav-link :href="route('showcarinfo')" :active="route().current('showcarinfo')">
+                                    내 차 보기
+                                </jet-nav-link>
                             </div>
                         </div>
 

@@ -80,7 +80,7 @@
                                             title: positions[i].title,
                                             clickable: true
                                         })
-                                        var piwContent = `<div>${positions[i].title}`+`<a href='https://map.kakao.com/link/to/${positions[i].title},${positions[i].lnt},${positions[i].lng}'>길찾기</a></div>`
+                                        var piwContent = `<div>${positions[i].title}`+`<br><a href='https://map.kakao.com/link/to/${positions[i].title},${positions[i].lnt},${positions[i].lng}'>길찾기</a></div>`
                                         var posinfo = new kakao.maps.InfoWindow({
                                             content : piwContent,
                                             removable : true

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarInfoController;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
 use Illuminate\Foundation\Application;
@@ -30,4 +31,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard', ['locations' => Location::all()]);
 })->name('dashboard');
 
-Route::get('/index', [Controller::class, 'index']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/mycar', [CarInfoController::class, 'inputinfo'])->name('mycar');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/storecarinfo', [CarInfoController::class, 'store'])->name('storecarinfo');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/showcarinfo', [CarInfoController::class, 'show'])->name('showcarinfo');
+                                        
+Route::middleware(['auth:sanctum', 'verified'])->delete('/deletecar/{id}', [CarInfoController::class, 'delete'])->name('deletecar');
+
+
+
+
