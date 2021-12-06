@@ -20717,8 +20717,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _Pages_Home_List_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Home/List.vue */ "./resources/js/Pages/Home/List.vue");
+ // import Pagination from '@/Components/Pagination'
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['locations'],
+  components: {
+    List: _Pages_Home_List_vue__WEBPACK_IMPORTED_MODULE_0__["default"] // Pagination,
+
+  },
+  data: function data() {
+    return {
+      newposi: []
+    };
+  },
   methods: {
     initMap: function initMap() {
       var mapContainer = document.getElementById('map'),
@@ -20736,6 +20748,7 @@ __webpack_require__.r(__webpack_exports__);
       var zoomControl = new kakao.maps.ZoomControl();
       map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
       marker.setMap(map);
+      var vm = this;
       var positions = [];
       this.locations.forEach(function (loc) {
         positions.push({
@@ -20743,8 +20756,7 @@ __webpack_require__.r(__webpack_exports__);
           latlng: new kakao.maps.LatLng(loc.위도, loc.경도),
           lnt: loc.위도,
           lng: loc.경도,
-          newaddress: loc.소재지도로명주소,
-          address: loc.소재지지번주소
+          address: loc.설치시도명
         });
       });
 
@@ -20767,15 +20779,14 @@ __webpack_require__.r(__webpack_exports__);
 
               var locate = result[0].address_name;
               var target = locate.split(' ', 1);
+              axios.post('/home', {
+                add: target[0]
+              }).then(function (response) {
+                vm.locations = response.data.data;
+              });
 
               for (var i = 0; i < positions.length; i++) {
-                var tempaddress = positions[i].newaddress;
-
-                if (tempaddress == null) {
-                  tempaddress = positions[i].address;
-                }
-
-                if (tempaddress.search(target[0]) != -1) {
+                if (positions[i].address.search(target[0]) != -1) {
                   var marker = new kakao.maps.Marker({
                     map: map,
                     position: positions[i].latlng,
@@ -20844,6 +20855,23 @@ __webpack_require__.r(__webpack_exports__);
       document.head.appendChild(script);
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/List.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/List.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['locations']
 });
 
 /***/ }),
@@ -21586,7 +21614,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+  "class": "min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-white-100"
 };
 var _hoisted_2 = {
   "class": "w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
@@ -24962,15 +24990,68 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card text-center shadow-2xl\"><figure class=\"px-10 pt-10\"><div id=\"map\" style=\"width:100%;height:400px;\"></div><div class=\"custom_zoomcontrol radius_border\"></div></figure><div class=\"card-body\"><h2 class=\"card-title\"></h2><p>지도에서 충전소 찾기</p></div></div>", 1);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("list");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_list, {
+    locations: $props.locations
+  }, null, 8
+  /* PROPS */
+  , ["locations"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <pagination class=\"mt-6\" :links=\"locations.links\"/> ")], 64
+  /* STABLE_FRAGMENT */
+  );
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/List.vue?vue&type=template&id=7d39a4d6":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/List.vue?vue&type=template&id=7d39a4d6 ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
 var _hoisted_1 = {
-  "class": "card text-center shadow-2xl"
+  "class": "card-body"
+};
+var _hoisted_2 = {
+  "class": "card-title"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<figure class=\"px-10 pt-10\"><div id=\"map\" style=\"width:100%;height:400px;\"></div><div class=\"custom_zoomcontrol radius_border\"></div></figure><div class=\"card-body\"><h2 class=\"card-title\"></h2><p>지도에서 충전소 찾기</p><div class=\"justify-center card-actions\"><button class=\"btn btn-outline btn-accent\">More info</button></div></div>", 2);
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.", -1
+/* HOISTED */
+);
 
-var _hoisted_4 = [_hoisted_2];
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-actions"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-primary"
+}, "Get Started"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-ghost"
+}, "More info")], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_4);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.locations, function (loc) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "card lg:card-side bordered",
+      key: loc
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(loc.충전소명), 1
+    /* TEXT */
+    ), _hoisted_3, _hoisted_4])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -51688,6 +51769,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Home/List.vue":
+/*!******************************************!*\
+  !*** ./resources/js/Pages/Home/List.vue ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _List_vue_vue_type_template_id_7d39a4d6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./List.vue?vue&type=template&id=7d39a4d6 */ "./resources/js/Pages/Home/List.vue?vue&type=template&id=7d39a4d6");
+/* harmony import */ var _List_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./List.vue?vue&type=script&lang=js */ "./resources/js/Pages/Home/List.vue?vue&type=script&lang=js");
+/* harmony import */ var C_Users_4rbal_Desktop_21_2_termProject_FeedMyCar_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_Users_4rbal_Desktop_21_2_termProject_FeedMyCar_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_List_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_List_vue_vue_type_template_id_7d39a4d6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Home/List.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Home/MyCar.vue":
 /*!*******************************************!*\
   !*** ./resources/js/Pages/Home/MyCar.vue ***!
@@ -52559,6 +52668,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Home/List.vue?vue&type=script&lang=js":
+/*!******************************************************************!*\
+  !*** ./resources/js/Pages/Home/List.vue?vue&type=script&lang=js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_List_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_List_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./List.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/List.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Home/MyCar.vue?vue&type=script&lang=js":
 /*!*******************************************************************!*\
   !*** ./resources/js/Pages/Home/MyCar.vue?vue&type=script&lang=js ***!
@@ -53359,6 +53484,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Home/List.vue?vue&type=template&id=7d39a4d6":
+/*!************************************************************************!*\
+  !*** ./resources/js/Pages/Home/List.vue?vue&type=template&id=7d39a4d6 ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_List_vue_vue_type_template_id_7d39a4d6__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_List_vue_vue_type_template_id_7d39a4d6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./List.vue?vue&type=template&id=7d39a4d6 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Home/List.vue?vue&type=template&id=7d39a4d6");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Home/MyCar.vue?vue&type=template&id=75601ba1":
 /*!*************************************************************************!*\
   !*** ./resources/js/Pages/Home/MyCar.vue?vue&type=template&id=75601ba1 ***!
@@ -53797,6 +53938,7 @@ var map = {
 	"./Home/CarInfo.vue": "./resources/js/Pages/Home/CarInfo.vue",
 	"./Home/CarInfoView.vue": "./resources/js/Pages/Home/CarInfoView.vue",
 	"./Home/FindStore.vue": "./resources/js/Pages/Home/FindStore.vue",
+	"./Home/List.vue": "./resources/js/Pages/Home/List.vue",
 	"./Home/MyCar.vue": "./resources/js/Pages/Home/MyCar.vue",
 	"./Home/MyCars.vue": "./resources/js/Pages/Home/MyCars.vue",
 	"./PrivacyPolicy.vue": "./resources/js/Pages/PrivacyPolicy.vue",

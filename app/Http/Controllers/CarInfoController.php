@@ -43,9 +43,12 @@ class CarInfoController extends Controller
     
     public function delete($id) {
         $car = Car::find($id);
-        dd($car->image);
+
+        $editedpath = substr($car->image, 8);
+        // dd($editedpath);
+
         if($car->image) {
-            $imagePath = $car->image;
+            $imagePath = "public".$editedpath;
             Storage::delete($imagePath);
         }
         $car->delete();

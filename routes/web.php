@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarInfoController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 use App\Models\Location;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard', ['locations' => Location::all()]);
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return Inertia::render('Dashboard', ['locations'=>Location::all()]);
+// })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [HomeController::class, 'home'])->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/home', [HomeController::class, 'getloc']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/mycar', [CarInfoController::class, 'inputinfo'])->name('mycar');
 

@@ -2,22 +2,34 @@
     <div class="card text-center shadow-2xl">
         <figure class="px-10 pt-10">
             <div id="map" style="width:100%;height:400px;"></div>
-            <div class="custom_zoomcontrol radius_border">
-    </div>
+            <div class="custom_zoomcontrol radius_border"></div>
         </figure>
             <div class="card-body">
                 <h2 class="card-title"></h2>
                 <p>지도에서 충전소 찾기</p>
-                <div class="justify-center card-actions">
-                    <button class="btn btn-outline btn-accent">More info</button>
-                </div>
             </div>
-        </div>
-    </template>
+    </div>
+    <div>
+        <list :locations="locations"/>
+    </div>
+    
+    <!-- <pagination class="mt-6" :links="locations.links"/> -->
+</template>
 
 <script>
+    import List from '@/Pages/Home/List.vue';
+    // import Pagination from '@/Components/Pagination'
     export default {
         props : ['locations'],
+        components : {
+            List,
+            // Pagination,
+        },
+        data() {
+            return {
+                newposi: []
+            }
+        }, 
         methods: {
             initMap() {
                 var mapContainer = document.getElementById('map'),
@@ -40,23 +52,20 @@
 
             marker.setMap(map);
 
-            
+            var vm = this
 
             var positions = [];
-
             this.locations.forEach(function(loc) {
                 positions.push({
                     title: loc.충전소명,
                     latlng: new kakao.maps.LatLng(loc.위도, loc.경도),
                     lnt: loc.위도,
                     lng: loc.경도,
-                    newaddress: loc.소재지도로명주소,
-                    address: loc.소재지지번주소
+                    address: loc.설치시도명
                 })
             })
             
             if (navigator.geolocation) {
-    
                     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
                     navigator.geolocation.getCurrentPosition(function(position) {
                         
@@ -68,12 +77,14 @@
                             if(status === kakao.maps.services.Status.OK) {
                                 var locate = result[0].address_name;
                                 var target = locate.split(' ', 1);
+
+                                axios.post('/home', {add:target[0]})
+                                .then((response)=>{
+                                    vm.locations = response.data.data
+                                })
+                                
                                 for(var i = 0; i < positions.length; i++){
-                                    var tempaddress = positions[i].newaddress
-                                    if(tempaddress == null) {
-                                        tempaddress = positions[i].address
-                                    }
-                                    if(tempaddress.search(target[0]) != -1)
+                                    if(positions[i].address.search(target[0]) != -1)
                                         {var marker = new kakao.maps.Marker({
                                             map: map,
                                             position: positions[i].latlng,
