@@ -2,7 +2,7 @@
     <app-layout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                지도에서 충전소 검색하기
+                충전소 상세정보
             </h2>
         </template>
 

@@ -52,7 +52,7 @@
                 // 마커가 지도 위에 표시되도록 설정합니다
                 marker.setMap(map);
 
-                var iwContent = `<div>${this.store.충전소명}`+`<br><a href='https://map.kakao.com/link/to/${this.store.충전소명},${this.store.위도},${this.store.경도}'>길찾기</a></div>`
+                var iwContent = `<div style="width:200px;height:50px;">${this.store.충전소명}`+`<br><a href='https://map.kakao.com/link/to/${this.store.충전소명},${this.store.위도},${this.store.경도}'>길찾기</a></div>`
                 var iwPosition = new kakao.maps.LatLng(this.lat, this.lng); //인포윈도우 표시 위치입니다
 
                 // 인포윈도우를 생성합니다

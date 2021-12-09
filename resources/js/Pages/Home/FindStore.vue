@@ -85,13 +85,14 @@
                                 
                                 for(var i = 0; i < positions.length; i++){
                                     if(positions[i].address.search(target[0]) != -1)
-                                        {var marker = new kakao.maps.Marker({
+                                        {var marker = new kakao.maps.Marker(
+                                            {
                                             map: map,
                                             position: positions[i].latlng,
                                             title: positions[i].title,
                                             clickable: true
                                         })
-                                        var piwContent = `<div>${positions[i].title}`+`<br><a href='https://map.kakao.com/link/to/${positions[i].title},${positions[i].lnt},${positions[i].lng}'>길찾기</a></div>`
+                                        var piwContent = `<div style="width:200px;height:50px;">${positions[i].title}`+`<br><a href='/showstore/${positions[i].title}'>충전소 정보 상세보기</a></div>`
                                         var posinfo = new kakao.maps.InfoWindow({
                                             content : piwContent,
                                             removable : true

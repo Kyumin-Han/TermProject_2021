@@ -20831,7 +20831,7 @@ __webpack_require__.r(__webpack_exports__);
                     title: positions[i].title,
                     clickable: true
                   });
-                  var piwContent = "<div>".concat(positions[i].title) + "<br><a href='https://map.kakao.com/link/to/".concat(positions[i].title, ",").concat(positions[i].lnt, ",").concat(positions[i].lng, "'>\uAE38\uCC3E\uAE30</a></div>");
+                  var piwContent = "<div style=\"width:200px;height:50px;\">".concat(positions[i].title) + "<br><a href='/showstore/".concat(positions[i].title, "'>\uCDA9\uC804\uC18C \uC815\uBCF4 \uC0C1\uC138\uBCF4\uAE30</a></div>");
                   var posinfo = new kakao.maps.InfoWindow({
                     content: piwContent,
                     removable: true
@@ -21099,7 +21099,7 @@ __webpack_require__.r(__webpack_exports__);
       }); // 마커가 지도 위에 표시되도록 설정합니다
 
       marker.setMap(map);
-      var iwContent = "<div>".concat(this.store.충전소명) + "<br><a href='https://map.kakao.com/link/to/".concat(this.store.충전소명, ",").concat(this.store.위도, ",").concat(this.store.경도, "'>\uAE38\uCC3E\uAE30</a></div>");
+      var iwContent = "<div style=\"width:200px;height:50px;\">".concat(this.store.충전소명) + "<br><a href='https://map.kakao.com/link/to/".concat(this.store.충전소명, ",").concat(this.store.위도, ",").concat(this.store.경도, "'>\uAE38\uCC3E\uAE30</a></div>");
       var iwPosition = new kakao.maps.LatLng(this.lat, this.lng); //인포윈도우 표시 위치입니다
       // 인포윈도우를 생성합니다
 
@@ -24882,7 +24882,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " 지도에서 충전소 검색하기 ", -1
+}, " 충전소 상세정보 ", -1
 /* HOISTED */
 );
 
