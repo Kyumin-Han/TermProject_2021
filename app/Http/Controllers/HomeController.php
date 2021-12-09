@@ -24,4 +24,8 @@ class HomeController extends Controller
             'data' => $newloc
         ]);
     }
+
+    public function show($name) {
+        return Inertia::render('Dashboard2', ['store' => Location::where('충전소명', $name)->first()]);
+    }
 }

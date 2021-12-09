@@ -41,8 +41,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/mycar', [CarInfoControlle
 Route::middleware(['auth:sanctum', 'verified'])->post('/storecarinfo', [CarInfoController::class, 'store'])->name('storecarinfo');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/showcarinfo', [CarInfoController::class, 'show'])->name('showcarinfo');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/moreinfo/{id}', [CarInfoController::class, 'showmore'])->name('moreinfo');
+
+Route::middleware(['auth:sanctum', 'verified'])->put('/updatecar/{id}', [CarInfoController::class, 'update'])->name('updatecar');
                                         
 Route::middleware(['auth:sanctum', 'verified'])->delete('/deletecar/{id}', [CarInfoController::class, 'delete'])->name('deletecar');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/showstore/{name}', [HomeController::class, 'show'])->name('showstore');
 
 
 

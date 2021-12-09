@@ -10,47 +10,47 @@
             </div>
     </div>
     <div>
-        <list :locations="locations"/>
+        <!-- <list :locations="locations2"/> -->
+        <div class="card lg:card-side bordered" v-for="loc in locations2" :key="loc">
+        <div class="card-body"> 
+            <Link :href="'/showstore/'+loc.충전소명">{{ loc.충전소명 }}</Link> 
+        </div>
+    </div>
     </div>
     
-    <!-- <pagination class="mt-6" :links="locations.links"/> -->
+    <!-- <pagination class="mt-6" :links="locations2.links"/> -->
 </template>
 
 <script>
-    import List from '@/Pages/Home/List.vue';
+    // import List from '@/Pages/Home/List.vue';
     // import Pagination from '@/Components/Pagination'
+    import {Link} from '@inertiajs/inertia-vue3'
     export default {
         props : ['locations'],
         components : {
-            List,
+            Link
+            // List,
             // Pagination,
         },
         data() {
             return {
-                newposi: []
+                locations2: this.locations,
             }
         }, 
         methods: {
             initMap() {
-                var mapContainer = document.getElementById('map'),
-                mapOption = {
-                    center: new kakao.maps.LatLng(37.23580406, 126.8738968),
-                    level: 3,
-                };
+            var mapContainer = document.getElementById('map'),
+            mapOption = {
+                center: new kakao.maps.LatLng(37.23580406, 126.8738968),
+                level: 3,
+            };
                 
             var map = new kakao.maps.Map(mapContainer, mapOption);
 
-            var markerPosition = new kakao.maps.LatLng(37.23580406, 126.8738968);
-
-            var marker = new kakao.maps.Marker({
-                position : markerPosition
-            });
             var mapTypeControl = new kakao.maps.MapTypeControl();
             map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
             var zoomControl = new kakao.maps.ZoomControl();
             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-            marker.setMap(map);
 
             var vm = this
 
@@ -80,7 +80,7 @@
 
                                 axios.post('/home', {add:target[0]})
                                 .then((response)=>{
-                                    vm.locations = response.data.data
+                                    vm.locations2 = response.data.data
                                 })
                                 
                                 for(var i = 0; i < positions.length; i++){
@@ -145,6 +145,7 @@
                 
                 // 지도 중심좌표를 접속위치로 변경합니다
                 map.setCenter(locPosition); 
+                
             }
 
             
